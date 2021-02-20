@@ -20,7 +20,7 @@ public:
     //Insere um novo nó com valor key apos o k-esimo no da lista.
     void insertAfter(int key, int k);
 
-    //Remove da lista a primeira ocorrˆencia do inteiro key
+    //Remove da lista a primeira ocorrencia do inteiro key
     void remove(int key); 
 
     //Remove da lista todas as ocorrencias do inteiro key.
@@ -58,6 +58,9 @@ public:
     bool equal(List *lst);
 
 private:
-
+    Node *head;
+    Node *value;
+    Node *prox;
+    Node *anterior;
 };
 #endif
