@@ -12,9 +12,10 @@ struct Node {
     Node *prox;
     Node *anterior;
 };
+struct Node *inicio;
+Node *fim;
 
-struct Node *primeiro;
-struct Node *ultimo;
+
 // Node *primeiro = new Node;
 // Node *ultimo = new Node;
 
@@ -62,6 +63,44 @@ void List:: pushBack(int key){
         novo->anterior = aux;
         novo->prox = head;
     }
+}
+
+
+//Remove da lista a primeira ocorrencia do inteiro key
+void List:: remove(int key){
+    if(!empty()){
+        Node *aux = new Node;
+        aux = head;
+
+        if(head->value == key){
+            if(head == head->prox){
+                head = nullptr;
+            }
+            else{
+                // head->anterior = head->prox;
+                // head->prox = head->anterior;
+
+                head = aux->prox;
+                head->anterior = aux->anterior;
+            }
+
+            delete(aux);
+        }
+    }
+    aux = aux->prox;
+
+    while(aux != head){
+        if(aux->value == key){
+            aux->anterior->prox = aux->prox;
+            aux->prox->anterior = aux->anterior;
+        }
+    }
+
+    
+        
+
+
+    
 }
 
 //Imprime os elementos da lista.

@@ -59,5 +59,7 @@ public:
 
 private:
     Node *head;
+    Node *inicio;
+    Node *fim;
 };
 #endif
