@@ -59,8 +59,5 @@ public:
 
 private:
     Node *head;
-    Node *value;
-    Node *prox;
-    Node *anterior;
 };
 #endif

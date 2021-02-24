@@ -21,12 +21,19 @@ struct Node *ultimo;
 //acho que esse construtor tem algum problema, mas eu ainda nao sei qual
 
 List:: List(){
-    Node *primeiro = new Node;
-    //lista->primeiro = nullptr;
+    head = nullptr;
 
-    primeiro->value = 0;
-    primeiro->prox = nullptr;
-    primeiro->anterior = nullptr;
+
+    // Node *novo = new Node;
+    // novo->value = value;
+    // novo->prox = novo;
+    // novo->anterior = novo;
+
+    // return novo;
+}
+
+List:: ~List(){
+    
 }
 
 //Insere um inteiro key ao final da lista.
@@ -43,50 +50,50 @@ void List:: pushBack(int key){
     if(empty()){
         novo->prox = novo;
         novo->anterior = novo;
-        primeiro = novo;
+        head = novo;
     }
     else{
         Node *aux = new Node;
-        while(aux->prox != primeiro){
+        while(aux->prox != head){
             aux = aux->prox;
         }
-        primeiro->anterior = novo;
+        head->anterior = novo;
         aux->prox = novo;
         novo->anterior = aux;
-        novo->prox = primeiro;
-
-        novo->prox = primeiro;
-        novo->anterior = aux;
-        aux->prox = novo;
-        primeiro->anterior = novo;
+        novo->prox = head;
     }
 }
 
 //Imprime os elementos da lista.
 //esta funcao esta com problema, alguma coisa relacionada com "primeiro"
 void List:: print(){
+    
+    if(head == nullptr)
+        return;
+    
     Node *aux = new Node;
-    aux = primeiro;
-
+    aux = head;
     do{
         cout << aux->value << " ";
         aux = aux->prox;
-    }while(aux =! primeiro);
+    }while(aux =! head);
 }
 
 //Imprime os elementos da lista em ordem reversa.
 //esta funcao esta com problema, alguma coisa relacionada com "primeiro"
 void List:: printReverse(){
+    if(head == nullptr)
+        return;
+    
     Node *aux = new Node;
-    aux = primeiro;
-
+    aux = head;
     do{
         cout << aux->value << " ";
         aux = aux->anterior;
-    }while(aux =! primeiro);
-}
+    }while(aux =! head);
+
 
 //Retorna true se a lista estiver vazia e false caso contrario.
 bool List:: empty(){
-    return primeiro == nullptr;
+    return head == nullptr;
 }
