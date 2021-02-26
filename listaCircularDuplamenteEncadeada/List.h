@@ -41,6 +41,8 @@ public:
     //Remove todos os elementos da lista e deixa apenas o nó cabeça.
     void clear(); 
 
+    bool contains(int key);
+
     //Concatena a lista atual com a lista lst passada por parametro. Apos essa operaçao ser executada, 
     //lst sera uma lista vazia, ou seja, o unico nó de lst sera o no cabeça.
     void concat(List *lst); 
@@ -59,6 +61,7 @@ public:
 
 private:
     Node *head;
+    Node *search(int x);
     Node *inicio;
     Node *fim;
 };
