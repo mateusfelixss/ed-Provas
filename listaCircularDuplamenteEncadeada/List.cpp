@@ -35,6 +35,7 @@ List:: List(){
 
 List:: ~List(){
     clear();
+    delete head;
 }
 
 //Insere um inteiro key ao final da lista.

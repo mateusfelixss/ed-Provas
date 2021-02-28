@@ -9,7 +9,7 @@ public:
     List(); 
 
     //Destrutor da classe. Libera memoria previamente alocada.
-    ∼List();
+    ~List();
 
     //Insere um inteiro key ao final da lista.
     void pushBack(int key);
@@ -41,7 +41,9 @@ public:
     //Remove todos os elementos da lista e deixa apenas o nó cabeça.
     void clear(); 
 
+    //funcao auxiliar
     bool contains(int key);
+
 
     //Concatena a lista atual com a lista lst passada por parametro. Apos essa operaçao ser executada, 
     //lst sera uma lista vazia, ou seja, o unico nó de lst sera o no cabeça.
@@ -62,7 +64,5 @@ public:
 private:
     Node *head;
     Node *search(int x);
-    Node *inicio;
-    Node *fim;
 };
 #endif

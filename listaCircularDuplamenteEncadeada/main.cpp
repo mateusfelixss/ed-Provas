@@ -38,43 +38,43 @@ int main()
 			listas.push_back( l );
             if(l != nullptr) cout << "lista " <<  listas.size()-1 << " criada" << endl;
 		}
-		// addback [x] list [k]
-		else if(tokens[0] == "addback") {
+		// pushBack [x] list [k] adiciona elemento ao final da lista
+		else if(tokens[0] == "pushBack") {
 			int x = std::stoi(tokens[1]);
 			int k = std::stoi(tokens[3]);
-			listas[k]->add_back(x); 
+			listas[k]->pushBack(x); 
 			cout << x << " adicionado ao final da lista " << k << endl;
 		}
-		// addfront [x] list [k]
-		else if(tokens[0] == "addfront") {
-			int x = std::stoi(tokens[1]);
-			int k = std::stoi(tokens[3]);
-			listas[k]->add_front(x); 
-			cout << x << " adicionado no inicio da lista " << k << endl;
-		}
+		// addfront [x] list [k] 					TALVEZ NAO PRECISE
+		// else if(tokens[0] == "addfront") {
+		// 	int x = std::stoi(tokens[1]);
+		// 	int k = std::stoi(tokens[3]);
+		// 	listas[k]->add_front(x); 
+		// 	cout << x << " adicionado no inicio da lista " << k << endl;
+		// }
 		// remove [x] list [k]
 		else if(tokens[0] == "remove") {
 			int x = std::stoi(tokens[1]);
 			int k = std::stoi(tokens[3]);
 			listas[k]->remove(x);
 		}
-		// removeall [x] list [k]
-		else if(tokens[0] == "removeall") {
+		// removeAll [x] list [k]
+		else if(tokens[0] == "removeAll") {
 			int x = std::stoi(tokens[1]);
 			int k = std::stoi(tokens[3]);
 			listas[k]->removeAll(x);
 		}
 		// removefront [k]
-		else if(tokens[0] == "removefront") {
+		// else if(tokens[0] == "removefront") {
+		// 	int k = std::stoi(tokens[1]);
+		// 	int elem = listas[k]->remove_front();
+		// 	if(elem != INT_MIN) cout << elem << " removido do inicio lista " << k << endl;
+		// 	else cout << " nao foi possivel remover do inicio da lista " << k << endl;
+		// }
+		// popBack [k]
+		else if(tokens[0] == "popBack") {
 			int k = std::stoi(tokens[1]);
-			int elem = listas[k]->remove_front();
-			if(elem != INT_MIN) cout << elem << " removido do inicio lista " << k << endl;
-			else cout << " nao foi possivel remover do inicio da lista " << k << endl;
-		}
-		// removeback [k]
-		else if(tokens[0] == "removeback") {
-			int k = std::stoi(tokens[1]);
-			int elem = listas[k]->remove_back();
+			int elem = listas[k]->popBack();
 			if(elem != INT_MIN) cout << elem << " removido do final lista " << k << endl;
 			else cout << " nao foi possivel remover do final da lista " << k << endl;
 		}
@@ -98,7 +98,13 @@ int main()
 		// print [k]
 		else if(tokens[0] == "print") {
 			int k = std::stoi(tokens[1]);
-			cout << "lista " << k << " = " << listas[k]->toString() << endl;
+			cout << "lista " << k << " = " << listas[k]->print() << endl;
+		}
+		// printReverse
+		else if(tokens[0] == "printReverse") {
+			int k = std::stoi(tokens[1]);
+			cout << "lista " << k << " = " << listas[k]->printReverse() << endl;
+			cout << "lista " << k << " = " << listas[k]->printReverse() << endl;
 		}
 		// contains [x] list [k]
 		else if(tokens[0] == "contains") {
