@@ -6,7 +6,10 @@
 #include "List.h"
 using namespace std;
 
-//Essa main precisa ser adaptada para o projeto
+
+// Aluna: Karine Ennalian Martins Laurindo  				Matrícula: 403160
+// Aluno: Mateus Felix de Souza Silva					Matrícula: 499053
+
 
 int main()
 {
@@ -45,32 +48,21 @@ int main()
 			listas[k]->pushBack(x); 
 			cout << x << " adicionado ao final da lista " << k << endl;
 		}
-		// addfront [x] list [k] 					TALVEZ NAO PRECISE
-		// else if(tokens[0] == "addfront") {
-		// 	int x = std::stoi(tokens[1]);
-		// 	int k = std::stoi(tokens[3]);
-		// 	listas[k]->add_front(x); 
-		// 	cout << x << " adicionado no inicio da lista " << k << endl;
-		// }
+
 		// remove [x] list [k]
 		else if(tokens[0] == "remove") {
 			int x = std::stoi(tokens[1]);
 			int k = std::stoi(tokens[3]);
 			listas[k]->remove(x);
 		}
+
 		// removeAll [x] list [k]
 		else if(tokens[0] == "removeAll") {
 			int x = std::stoi(tokens[1]);
 			int k = std::stoi(tokens[3]);
 			listas[k]->removeAll(x);
 		}
-		// removefront [k]
-		// else if(tokens[0] == "removefront") {
-		// 	int k = std::stoi(tokens[1]);
-		// 	int elem = listas[k]->remove_front();
-		// 	if(elem != INT_MIN) cout << elem << " removido do inicio lista " << k << endl;
-		// 	else cout << " nao foi possivel remover do inicio da lista " << k << endl;
-		// }
+		
 		// popBack [k]
 		else if(tokens[0] == "popBack") {
 			int k = std::stoi(tokens[1]);
@@ -104,14 +96,6 @@ int main()
 		else if(tokens[0] == "printReverse") {
 			int k = std::stoi(tokens[1]);
 			cout << "lista " << k << " = " << listas[k]->printReverse() << endl;
-			cout << "lista " << k << " = " << listas[k]->printReverse() << endl;
-		}
-		// contains [x] list [k]
-		else if(tokens[0] == "contains") {
-			int x = std::stoi(tokens[1]);
-			int k = std::stoi(tokens[3]);
-			if(listas[k]->contains(x)) cout << x << " esta na lista " << k << endl;
-			else cout << x << " NAO esta na lista " << k << endl;
 		}
 		else {
 			cout << "comando inexistente" << endl;

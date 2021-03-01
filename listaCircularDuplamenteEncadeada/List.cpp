@@ -3,34 +3,20 @@
 #include <climits>
 #include <stdlib.h>
 #include "List.h"
-//#include "LISTCIRC2_H"
 using namespace std;
 
+
+// Aluna: Karine Ennalian Martins Laurindo  				Matrícula: 403160
+// Aluno: Mateus Felix de Souza Silva					Matrícula: 499053
 
 struct Node {
     int value;
     Node *prox;
     Node *anterior;
 };
-struct Node *inicio;
-Node *fim;
-
-
-// Node *primeiro = new Node;
-// Node *ultimo = new Node;
-
-//acho que esse construtor tem algum problema, mas eu ainda nao sei qual
 
 List:: List(){
     head = nullptr;
-
-
-    // Node *novo = new Node;
-    // novo->value = value;
-    // novo->prox = novo;
-    // novo->anterior = novo;
-
-    // return novo;
 }
 
 List:: ~List(){
@@ -43,22 +29,18 @@ void List:: pushBack(int key){
     Node *novo = new Node;
     novo->value = key;
 
-    // ultimo->prox = novo;
-    // novo->prox = ultimo;
-    // novo->prox = nullptr;
-    // ultimo = ultimo->prox;
-    // novo = nullptr;
-
+    //verifica se possui algum elemento na lista
     if(empty()){
-        novo->prox = novo;
+        novo->prox = novo;      //caso a lista seja vazia, é adicionado um novo elemento
         novo->anterior = novo;
         head = novo;
     }
-    else{
+    else{  //caso nao esteja vazia a lista 
         Node *aux = new Node;
-        while(aux->prox != head){
+        while(aux->prox != head){   //busca para encontrar o ultimo elemento da lista
             aux = aux->prox;
         }
+        //ajuste de ponteiros
         head->anterior = novo;
         aux->prox = novo;
         novo->anterior = aux;
@@ -69,19 +51,22 @@ void List:: pushBack(int key){
 //Remove elemento do final da lista e retorna seu valor.
 int List:: popBack(){
     Node *aux = head;
-
+    //verifica se a lista é vazia
     if(head == nullptr)
         return 0;
 
+    //verifica se o elemento a ser removido é o unico da lista, caso seja, ele é removido e retorna o seu value
     if(aux == aux->prox){
-        delete aux;
         return head->value;
+        delete aux;
         head = nullptr;
     }
     
+    //percorre a lista até antes da head
     while(aux != head)
         aux = aux->prox;
 
+    //ajuste de ponteiros
     aux->anterior = head;
     head->anterior = aux->anterior;
 
@@ -93,17 +78,42 @@ int List:: popBack(){
 //Insere um novo nó com valor key apos o k-esimo no da lista.
 void List:: insertAfter(int key, int k){
 
+    
+    //verifica se a lista é vazia
+    if(head == nullptr){
+        cout << "Lista vazia";
+        return;
+    }
+
+    else if(size() > k){
+        Node *novo = new Node;
+        novo->value = key;
+        Node *aux = head;
+
+        while(0 < k){
+            aux = aux->prox;
+            k--;
+        }
+        //ajuste de ponteiro
+        aux->prox = novo;
+        novo->anterior = aux;
+        novo->prox = aux->prox->prox;
+        aux->prox->prox->anterior = novo;
+
+        cout << "Adicionado com sucesso";
+    }else{
+        cout << "Posicao k nao esta na lista";
+    }    
 }
 
 
 //Remove da lista a primeira ocorrencia do inteiro key
 void List:: remove(int key){
-    Node *noRemover = search(key);
+    Node *noRemover = search(key);  //busca na lista o elemento que deseja remover
 
     if(noRemover == nullptr)
         return;
-
-    
+   
     if(noRemover == noRemover->prox){
         delete noRemover;
         head = nullptr;
@@ -122,36 +132,7 @@ void List:: remove(int key){
     if(head == noRemover)
         head = noRemover->prox;
     
-    delete noRemover;
-
-    // if(!empty()){
-    //     Node *aux = new Node;
-    //     aux = head;
-
-    //     if(head->value == key){
-    //         if(head == head->prox){
-    //             head = nullptr;
-    //         }
-    //         else{
-    //             // head->anterior = head->prox;
-    //             // head->prox = head->anterior;
-
-    //             head = aux->prox;
-    //             head->anterior = aux->anterior;
-    //         }
-
-    //         delete(aux);
-    //     }
-    // }
-    // aux = aux->prox;
-
-    // while(aux != head){
-    //     if(aux->value == key){
-    //         aux->anterior->prox = aux->prox;
-    //         aux->prox->anterior = aux->anterior;
-    //     }
-    // }
-    
+    delete noRemover;    
 }
 
 //Remove da lista todas as ocorrencias do inteiro key.
@@ -164,24 +145,23 @@ void List:: removeAll(int key){
 void List:: clear(){
     if(head != nullptr){
         Node *aux = head->prox;
-        while(aux != head){
+        while(aux != head){         
             Node *aux2 = aux;
             aux = aux->prox;
             cout << "Removendo " << aux2->value << endl;
             delete aux2;
         }
-       // cout < "Removendo " << head->value << endl;
+       
         delete head;
         head = nullptr;
     }
 }
 
 
-
 //Imprime os elementos da lista.
 //esta funcao esta com problema, alguma coisa relacionada com "primeiro"
 void List:: print(){
-    
+    //caso nao tenha nenhum elemento na lista, nada é retornado.
     if(head == nullptr)
         return;
     
@@ -238,6 +218,7 @@ int List:: size(){
     return cont;
 }
 
+//essa funcao retorna todas as ocorrencias do value key passado como paramentro
 bool List:: contains(int key){
     return (search(key) != nullptr);
 }

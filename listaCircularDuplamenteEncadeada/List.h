@@ -1,6 +1,9 @@
 #ifndef LISTCIRC2_H
 #define LISTCIRC2_H
 
+// Aluna: Karine Ennalian Martins Laurindo  				Matrícula: 403160
+// Aluno: Mateus Felix de Souza Silva					Matrícula: 499053s
+
 struct Node;
 
 class List{
