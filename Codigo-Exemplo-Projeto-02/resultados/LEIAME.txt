@@ -1,0 +1,26 @@
+Instrucoes para gerar graficos usando gnuplot no Linux:
+
+Para gerar os graficos usando o software gnuplot, 
+voce precisa antes instala-lo no seu computador.
+Veja este link:
+
+http://www.matsuura.com.br/2016/08/como-instalar-o-gnuplot-504.html
+
+----------------------------------------------------
+
+Para gerar um grafico, abra o terminal do linux  nesta pasta e digite 
+o seguinte comando no terminal:
+
+gnuplot graphBubble.p
+
+-----------------------------------------------------
+
+Nota: o arquivo "graphBubble.p" contem comandos proprios do gnuplot que
+ensinam como plotar o grafico. Para aprender como customizar os seus graficos,
+há varios sites na internet ensinando como fazer. Um exemplo:
+
+http://www.gnuplotting.org/plotting-data/
+
+
+
+
