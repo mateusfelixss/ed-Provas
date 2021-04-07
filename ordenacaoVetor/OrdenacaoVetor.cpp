@@ -1,21 +1,21 @@
 #include <iostream>
 #include <fstream>
 #include <chrono>
+#include <stdlib.h>
+#include "OrdenacaoVetor.h"
 using namespace std;
 
+// Aluna: Karine Ennalian Martins Laurindo  				Matrícula: 403160
+// Aluno: Mateus Felix de Souza Silva					    Matrícula: 499053
 
-// Comandos para compilar e executar codigos por linhas de comando:
-//     --> gcc (ou gpp) seucodigo.c -o seuprograma.
-//     --> ./seuprograma
-
-void swapSelection(int *xp, int *yp) 
+void OrdenacaoVetor:: swapSelection(int *xp, int *yp) 
 { 
     int temp = *xp; 
     *xp = *yp; 
     *yp = temp; 
 } 
   
-void selectionSort(int arr[], int n) 
+void OrdenacaoVetor:: selectionSort(int arr[], int n) 
 { 
     int i, j, min_idx; 
   
@@ -34,7 +34,7 @@ void selectionSort(int arr[], int n)
 }
 
 /* Function to sort an array using insertion sort*/
-void insertionSort(int arr[], int n)
+void OrdenacaoVetor:: insertionSort(int arr[], int n)
 {
     int i, key, j;
     for (i = 1; i < n; i++)
@@ -55,7 +55,7 @@ void insertionSort(int arr[], int n)
 }
 
 
-void merge(int arr[], int l, int m, int r)
+void OrdenacaoVetor:: merge(int arr[], int l, int m, int r)
 {
     int n1 = m - l + 1;
     int n2 = r - m;
@@ -112,7 +112,7 @@ void merge(int arr[], int l, int m, int r)
 // l is for left index and r is
 // right index of the sub-array
 // of arr to be sorted */
-void mergeSort(int arr[],int l,int r){
+void OrdenacaoVetor:: mergeSort(int arr[],int l,int r){
     if(l>=r){
         return;//returns recursively
     }
@@ -122,7 +122,7 @@ void mergeSort(int arr[],int l,int r){
     merge(arr,l,m,r);
 }
 
-void swapQuick(int* a, int* b)
+void OrdenacaoVetor:: swapQuick(int* a, int* b)
 {
     int t = *a;
     *a = *b;
@@ -134,7 +134,7 @@ the pivot element at its correct position in sorted
 array, and places all smaller (smaller than pivot)
 to left of pivot and all greater elements to right
 of pivot */
-int partition (int arr[], int low, int high)
+int OrdenacaoVetor:: partition (int arr[], int low, int high)
 {
     int pivot = arr[high]; // pivot
     int i = (low - 1); // Index of smaller element and indicates the right position of pivot found so far
@@ -156,7 +156,7 @@ int partition (int arr[], int low, int high)
 arr[] --> Array to be sorted,
 low --> Starting index,
 high --> Ending index */
-void quickSort(int arr[], int low, int high)
+void OrdenacaoVetor:: quickSort(int arr[], int low, int high)
 {
     if (low < high)
     {
@@ -173,7 +173,7 @@ void quickSort(int arr[], int low, int high)
 
 
 // A utility function to print an array of size n
-void printArray(int arr[], int n)
+void OrdenacaoVetor:: printArray(int arr[], int n)
 {
     int i;
     for (i = 0; i < n; i++)
@@ -181,65 +181,39 @@ void printArray(int arr[], int n)
     std::cout << endl;
 }
 
-int main(){
-    int n = 15;
-    int vetor[n] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 20, 33, 44, 0, -5};
-    int m = 15;
-    int vetor2[m] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 20, 33, 44, 0, -5};
-    
-    int valor = 20;
-    int vetor3[valor] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 20, 33, 44, 0, -5, 2, 11, 12, 5, 7};
-    int arr_size = sizeof(vetor3) / sizeof(vetor3[0]);
-    
-    int valor2 = 15;
-    int vetor4[valor2] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 20, 33, 44, 0, -5};
-    int valor4 = 20;
-    int vetor5[valor4] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 20, 33, 44, 0, -5, 2, 11, 12, 5, 7};
-    int arr_size2 = sizeof(vetor5) / sizeof(vetor5[0]);
-    int arr_size3 = sizeof(vetor4) / sizeof(vetor4[0]);
+void OrdenacaoVetor:: gera_dados(int num_iteracoes, const int vetor_tam[]) 
+{
+	for(int n = 0; n < num_iteracoes; n++) {
+		// para cada tamanho n, sao gerados 5 vetores de tamanho n aleatorios
+		for(int semente = 0; semente < 5; semente++) {	
+			std::string nome_arquivo = "dados/random"+std::to_string(n)+"_"+std::to_string(semente)+".dat";
+			ofstream fout(nome_arquivo.c_str(), ios::binary);
+			srand(time(NULL)); // gera semente
+			int r;
+			int tamanho_vetor = vetor_tam[n];
+			for(int i = 0; i < tamanho_vetor; i++) 
+			{
+				r = rand(); // gera numero aleatorio
+				fout.write((char*)&r, sizeof(r));
+			}
+			fout.close();
+		}
+	}
+}
 
+// ------------------------------------------------------------------
 
-    cout << "Insertion Sort" << endl;
-    printArray(vetor, n);
-
-    insertionSort(vetor, n);
-
-    printArray(vetor, n);
-
-    cout << "Selection Sort" << endl;
-    printArray(vetor2, m);
-
-    selectionSort(vetor2, m);
-
-    printArray(vetor2, m);
-
-//quando o vetor tem algoritmo repetido, faz aluns elementos sumirem ERRRRRRO
-    cout << "Merge Sort" << endl;
-    printArray(vetor3, valor);
-
-    mergeSort(vetor3, 0, arr_size);
-
-    printArray(vetor3, valor);
-
-    cout << "vetor3: "<< sizeof(vetor3) << endl;
-    cout << "vetor3[0]: "<< sizeof(vetor3[0]) << endl;
-
-
-
-//Funcionando de boinha
-
-    cout << "Quick Sort" << endl;
-    printArray(vetor4, valor2);
-
-    quickSort(vetor4, 0, arr_size3 - 1);
-
-    printArray(vetor4, valor2);
-
-    cout << "Segundo Round do Quick Sort" << endl;
-
-    printArray(vetor5, valor4);
-
-    quickSort(vetor5, 0, arr_size2 - 1);
-
-    printArray(vetor5, valor4);
+/*
+ * Recebe um vetor de inteiros A[0..n-1] como argumento e o preenche
+ * com os n inteiros contidos no arquivo binario de mesmo nome que a 
+ * string nomeArquivo
+ */
+void OrdenacaoVetor:: ler_dados(int n, int A[], const char *nomeArquivo) 
+{	
+	ifstream fin(nomeArquivo, ios::binary); // abre arquivo para leitura
+	for (int i = 0; i < n; i++) 
+	{
+		fin.read((char*)&A[i], sizeof(int)); // ler os inteiros do arquivo e guarda no vetor A
+	}
+	fin.close(); // fecha o arquivo de leitura
 }
