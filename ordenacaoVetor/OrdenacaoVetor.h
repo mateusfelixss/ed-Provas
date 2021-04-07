@@ -23,6 +23,10 @@ public:
 
     void quickSort(int arr[], int low, int high); //algoritmo OK
 
+    int getNextGap(int gap);
+
+    void combSort(int a[], int n); //algoritmo
+
     void printArray(int arr[], int n);
 
     void gera_dados(int num_iteracoes, const int vetor_tam[]);

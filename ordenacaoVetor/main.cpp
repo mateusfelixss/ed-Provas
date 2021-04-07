@@ -211,6 +211,55 @@ int main()
 	
 	ofs4.close(); // fecha arquivo de resultados do quickSort
 	// ------------------------------------------------------------
+
+
+
+
+// ------------------------------------------------------------
+	// Etapa 2 - Execucao do combSort
+	// Para cada arquivo gerado na etapa 1, ler o arquivo e popular
+	// um vetor de inteiros com os dados lidos.
+	std::ofstream ofs5("resultados/resultadoCombSort.txt", std::ofstream::out ); // abre arquivo de resultados do selectionShort
 	
+	for(int iteracao = 0; iteracao < TOTAL_N; iteracao++) {
+		
+		long double duracao_media_combSort = 0.0;
+		int tamanho_vetor = tam[iteracao]; // pega o tamanho do vetor para esta iteracao
+		int vetor[tamanho_vetor]; // cria vetor a ser ordenado
+		
+		// Para cada tamanho de vetor, a funcao gera_dados() gerou 5 vetores diferentes. 
+		// Cada um usou uma semente diferente. Agora, vamos ler cada um desses vetores, 
+		// Chamar o cocktail sort para ordena-los e, entao, calcular o tempo medio de 
+		// execucao dessas cinco chamadas e depois salvar esse tempo medio em arquivo.
+		for(int semente = 0; semente < 5; semente++) 
+		{	
+			string nome_arquivo = "dados/random"+std::to_string(iteracao)+"_"+std::to_string(semente)+".dat";
+		
+			ler_dados(tamanho_vetor, vetor, nome_arquivo.c_str());
+			
+			// combSort ------------------------------------------------------
+			// obtendo o tempo inicial
+			auto ini = std::chrono::high_resolution_clock::now();
+		
+			combSort(vetor, tamanho_vetor); // ordena o vetor usando o combSort
+		
+			// obtendo o tempo final
+			auto fim = std::chrono::high_resolution_clock::now();
+		
+			// obtendo a duração total da ordenação
+			auto duracao_combSort = std::chrono::duration_cast<std::chrono::microseconds>(fim - ini).count();
+			
+			duracao_media_combSort += duracao_combSort;
+			
+		}
+		
+		duracao_media_combSort = duracao_media_combSort / 5.0;
+		cout << "[combSort] N = " << tamanho_vetor << ", tempo médio de execução = " << duracao_media_combSort << " microssegundos" << endl;
+		ofs << tamanho_vetor << " " << duracao_media_combSort << "\n"; // grava no arquivo de resultados do combSort
+	}
+	
+	ofs5.close(); // fecha arquivo de resultados do combSort
+	// ------------------------------------------------------------	
+
 	return 0;
 }
