@@ -19,32 +19,23 @@ void OrdenacaoVetor:: selectionSort(int arr[], int n)
 { 
     int i, j, min_idx; 
   
-    // One by one move boundary of unsorted subarray 
-    for (i = 0; i < n-1; i++) 
-    { 
-        // Find the minimum element in unsorted array 
+    for (i = 0; i < n-1; i++) { 
         min_idx = i; 
-        for (j = i+1; j < n; j++) 
+        for (j = i + 1; j < n; j++) 
         if (arr[j] < arr[min_idx]) 
             min_idx = j; 
   
-        // SwapSelection the found minimum element with the first element 
         swapSelection(&arr[min_idx], &arr[i]); 
     } 
 }
 
-/* Function to sort an array using insertion sort*/
-void OrdenacaoVetor:: insertionSort(int arr[], int n)
-{
+
+void OrdenacaoVetor:: insertionSort(int arr[], int n){
     int i, key, j;
-    for (i = 1; i < n; i++)
-    {
+    for (i = 1; i < n; i++){
         key = arr[i];
         j = i - 1;
  
-        /* Move elements of arr[0..i-1], that are
-        greater than key, to one position ahead
-        of their current position */
         while (j >= 0 && arr[j] > key)
         {
             arr[j + 1] = arr[j];
@@ -55,30 +46,26 @@ void OrdenacaoVetor:: insertionSort(int arr[], int n)
 }
 
 
-void OrdenacaoVetor:: merge(int arr[], int l, int m, int r)
+void OrdenacaoVetor:: merge(int arr[], int left, int middle, int right)
 {
-    int n1 = m - l + 1;
-    int n2 = r - m;
+    int n1 = middle - left + 1;
+    int n2 = right - middle;
  
-    // Create temp arrays
+
     int L[n1], R[n2];
  
-    // Copy data to temp arrays L[] and R[]
+
     for (int i = 0; i < n1; i++)
-        L[i] = arr[l + i];
+        L[i] = arr[left + i];
     for (int j = 0; j < n2; j++)
-        R[j] = arr[m + 1 + j];
+        R[j] = arr[middle + 1 + j];
  
-    // Merge the temp arrays back into arr[l..r]
  
-    // Initial index of first subarray
     int i = 0;
- 
-    // Initial index of second subarray
+
     int j = 0;
- 
-    // Initial index of merged subarray
-    int k = l;
+
+    int k = left;
  
     while (i < n1 && j < n2) {
         if (L[i] <= R[j]) {
@@ -92,16 +79,13 @@ void OrdenacaoVetor:: merge(int arr[], int l, int m, int r)
         k++;
     }
  
-    // Copy the remaining elements of
-    // L[], if there are any
     while (i < n1) {
         arr[k] = L[i];
         i++;
         k++;
     }
  
-    // Copy the remaining elements of
-    // R[], if there are any
+  
     while (j < n2) {
         arr[k] = R[j];
         j++;
@@ -109,17 +93,15 @@ void OrdenacaoVetor:: merge(int arr[], int l, int m, int r)
     }
 }
  
-// l is for left index and r is
-// right index of the sub-array
-// of arr to be sorted */
-void OrdenacaoVetor:: mergeSort(int arr[],int l,int r){
-    if(l>=r){
-        return;//returns recursively
+
+void OrdenacaoVetor:: mergeSort(int arr[],int left,int right){
+    if(left >= right){
+        return;
     }
-    int m =l+ (r-l)/2;
-    mergeSort(arr,l,m);
-    mergeSort(arr,m+1,r);
-    merge(arr,l,m,r);
+    int middle = left + (right - left) / 2;
+    mergeSort(arr, left, middle);
+    mergeSort(arr,middle + 1, right);
+    merge(arr, left, middle, right);
 }
 
 void OrdenacaoVetor:: swapQuick(int* a, int* b)
@@ -129,22 +111,14 @@ void OrdenacaoVetor:: swapQuick(int* a, int* b)
     *b = t;
 }
  
-/* This function takes last element as pivot, places
-the pivot element at its correct position in sorted
-array, and places all smaller (smaller than pivot)
-to left of pivot and all greater elements to right
-of pivot */
-int OrdenacaoVetor:: partition (int arr[], int low, int high)
-{
-    int pivot = arr[high]; // pivot
-    int i = (low - 1); // Index of smaller element and indicates the right position of pivot found so far
+
+int OrdenacaoVetor:: partition (int arr[], int low, int high){
+    int pivot = arr[high];
+    int i = (low - 1);
  
-    for (int j = low; j <= high - 1; j++)
-    {
-        // If current element is smaller than the pivot
-        if (arr[j] < pivot)
-        {
-            i++; // increment index of smaller element
+    for (int j = low; j <= high - 1; j++){
+
+        if (arr[j] < pivot){
             swapQuick(&arr[i], &arr[j]);
         }
     }
@@ -152,77 +126,48 @@ int OrdenacaoVetor:: partition (int arr[], int low, int high)
     return (i + 1);
 }
  
-/* The main function that implements QuickSort
-arr[] --> Array to be sorted,
-low --> Starting index,
-high --> Ending index */
-void OrdenacaoVetor:: quickSort(int arr[], int low, int high)
-{
-    if (low < high)
-    {
-        /* pi is partitioning index, arr[p] is now
-        at right place */
+
+void OrdenacaoVetor:: quickSort(int arr[], int low, int high){
+    if (low < high){
+    
         int pi = partition(arr, low, high);
- 
-        // Separately sort elements before
-        // partition and after partition
+
         quickSort(arr, low, pi - 1);
         quickSort(arr, pi + 1, high);
     }
 }
 
-int OrdenacaoVetor:: getNextGap(int gap)
-{
-    // Shrink gap by Shrink factor
-    gap = (gap*10)/13;
+int OrdenacaoVetor:: getNextGap(int gap){
+
+    gap = (gap * 10) / 13;
  
     if (gap < 1)
         return 1;
     return gap;
 }
  
-// Function to sort a[0..n-1] using Comb Sort
-void OrdenacaoVetor:: combSort(int a[], int n)
-{
-    // Initialize gap
+//algoritmo de ordenao: comboSort
+void OrdenacaoVetor:: combSort(int a[], int n){
+    
     int gap = n;
- 
-    // Initialize swapped as true to make sure that
-    // loop runs
+
     bool swapped = true;
  
-    // Keep running while gap is more than 1 and last
-    // iteration caused a swap
-    while (gap != 1 || swapped == true)
-    {
-        // Find next gap
+    while (gap != 1 || swapped == true){
+         
         gap = getNextGap(gap);
  
-        // Initialize swapped as false so that we can
-        // check if swap happened or not
         swapped = false;
  
-        // Compare all elements with current gap
-        for (int i=0; i<n-gap; i++)
-        {
-            if (a[i] > a[i+gap])
-            {
-                swap(a[i], a[i+gap]);
+        for (int i = 0; i < n - gap; i++){
+            if (a[i] > a[i + gap]){
+                swap(a[i], a[i + gap]);
                 swapped = true;
             }
         }
     }
 }
 
-
-// A utility function to print an array of size n
-void OrdenacaoVetor:: printArray(int arr[], int n)
-{
-    int i;
-    for (i = 0; i < n; i++)
-        std::cout << arr[i] << " ";
-    std::cout << endl;
-}
 
 void OrdenacaoVetor:: gera_dados(int num_iteracoes, const int vetor_tam[]) 
 {

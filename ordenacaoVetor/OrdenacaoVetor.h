@@ -9,25 +9,23 @@ class OrdenacaoVetor{
 public:
     void swapSelection(int *xp, int *yp);
 
-    void selectionSort(int arr[], int n); //algoritmo OK
+    void selectionSort(int arr[], int n); 
 
-    void insertionSort(int arr[], int n); //algoritmo OK
+    void insertionSort(int arr[], int n); 
 
-    void merge(int arr[], int l, int m, int r);
+    void merge(int arr[], int left, int middle, int right);
 
-    void mergeSort(int arr[],int l,int r); //algoritmo OK
+    void mergeSort(int arr[],int left,int right); 
 
     void swapQuick(int* a, int* b);
 
     int partition (int arr[], int low, int high);
 
-    void quickSort(int arr[], int low, int high); //algoritmo OK
+    void quickSort(int arr[], int low, int high); 
 
     int getNextGap(int gap);
 
-    void combSort(int a[], int n); //algoritmo
-
-    void printArray(int arr[], int n);
+    void combSort(int a[], int n); 
 
     void gera_dados(int num_iteracoes, const int vetor_tam[]);
 
